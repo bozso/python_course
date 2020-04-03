@@ -1,0 +1,290 @@
+<DOCTYPE! html>
+
+<html>
+    <head>
+        <title>Az Anaconda python disztribúció telepítése és használata</title>
+        <meta charset="utf-8">
+        <meta author="Bozsó István">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        
+        <style>
+            img {
+                width: 100%;
+                border: 1.75px solid black;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="/home/istvan/packages/src/github.com/bozso/utils/css/notes.css" />
+    </head>
+    
+    <body>
+        <h1>Az Anaconda python disztribúció telepítése és használata</h1>
+        
+        <h2>Az Anaconda</h2>
+        
+        <p>
+            A Python-t többféleképpen is fel lehet telpíteni. Linux
+            alapú rendszereken jó eséllyel már fel van telepítve, így
+            gond nélkül használható.
+        </p>
+        
+        <p>
+            Gyakorlatban nem a Python parancsértelmező telepítése, hanem
+            a Python csomagok kezelése a nagyobb kihívás. Szerencsére
+            a probléma megoldására már több programot is
+            kifejlesztettek. Az egyik legelterjedtebb az
+            <a href="https://www.anaconda.com/">Anaconda</a>
+            python disztribúció.
+        </p>
+        
+        <p>
+            Az Anaconda nem csak a python parancsértelmezőt tartalmaz,
+            hanem a egy csomagkezelőt, grafikus kezelőfelületet és
+            további hasznos programokat.
+        </p>
+        
+        <h2>A telepítés lépései</h2>
+        <ol type="1">
+            <li>
+                Keressük fel az Anaconda honlapját;
+                <a href="https://www.anaconda.com/">link</a>.
+                A <strong>Downloads</strong> menüpontra kattintva a webplap
+                átirányít a letöltésekhez. Itt kétfajta disztribúciót
+                tölthetünk le:
+                <ul>
+                    <li>
+                        Az egyik egy régebbi Python (v 2.7) verzióra
+                        alapul. Ezt a verziót nem ajánlom, csak régebbi
+                        csmagokkal való kompatibilitás érdekében
+                        érhető el.
+                    </li>
+                    <li>
+                        A másik a legutolsó stabil Python verzión
+                        alapul (v 3.*). A legtöbb csomag ezzel
+                        kompatibilis, ennek a használatát ajánlom.
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <figure>
+            <img src="images/anaconda/webpage.png" alt="Anaconda honlap"/>
+            <figcaption>Anaconda honlap</figcaption>
+        </figure>
+        
+        <ol start="2" type="1">
+            <li>
+                <p>A letöltött <code>.exe</code> fájlt futtatva a
+                program telepíthető.</p>
+            </li>
+            <li>A telepítés után több program is rendelkezésünkre áll.
+                <ul>
+                    <li>
+                        Az <strong>Anaconda Navigator</strong> a
+                        grafikus felhasználói felületet indítja el.
+                    </li>
+                    
+                    <li>
+                        Az <strong>Anaconda Powershell Prompt</strong>
+                        pedig a parancssoros alkalmazást, azoknak
+                        akiknek a parancssor jobban kézre áll.
+                    </li>
+                    
+                    <li>
+                        A <strong>Jupyter Notebook</strong> egy web
+                        alkalmazást indít el. A <em>notebook</em>
+                        formátum segítségével interaktívan lehet Python
+                        scripteket készíteni. Erről a következő
+                        dokumentumban lesz szó.
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        
+        <figure>
+            <img
+                style="width: 600px;"
+                src="images/anaconda/applications.png"
+                alt="Anaconda programok"
+            />
+            <figcaption>Anaconda programok</figcaption>
+        </figure>
+        
+        <h2>A grafikus alkalmazás</h2>
+        
+        <p>
+            Az <strong>Anaconda Navigator</strong>-t elindítva a
+            következő képernyő fogad minket.
+        </p>
+        
+        <figure>
+            <img src="images/anaconda/main_page.png" alt="Anaconda fő oldal"/>
+            <figcaption>Anaconda fő oldal</figcaption>
+        </figure>
+        
+        <h3>Elérhető programok</h3>
+        
+        <p>
+            Itt további alkalmazások érhetőek el. A <a 
+            href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html"><strong>Jupyter 
+            Notebook</strong></a>-ot már említettem. A 
+            <strong>JupyterLab</strong> tulajdonképpen a következő 
+            generációja a <strong>Notebook</strong> programnak, 
+            funkcionalítás szempontjából nagyon hasonló.
+        </p>
+        
+        <p>
+            A <a 
+            href="https://www.spyder-ide.org/"><strong>Spyder</strong></a> 
+            egy Matlab-hoz hasonló grafikus felületet biztosít a Python 
+            scriptek írásához. Számtalan funkciója közül a két talán 
+            leghasznosabb
+            <ul>
+                <li>
+                    a dokumentáció-böngészőt, mely a különböző
+                    függvények dokumentációját teszi elérhetővé,
+                </li>
+                <li>
+                    definált változók értékeinek megtekintése,
+                    böngészése (pl. mátrixok értékeinek áttekintése).
+                </li>
+            </ul>
+        </p>
+        
+        <h3>A csomagkezelő</h3>
+        
+        <p>
+            A beépített csomagkezelő, <strong>Environments</strong>
+            menüpont, képes különböző python csomagok telepítésére,
+            csomagok verzióinak kezelésére.
+        </p>
+            <figure>
+                <img src="images/anaconda/packages.png" alt="Anaconda csomagok"/>
+                <figcaption>
+                    A csomagkezelőből elérhtő/telepített Python csomagok 
+                </figcaption>
+            </figure>
+        
+        <p>
+            Az Anaconda disztribúció alapból tartalmaz jónéhány
+            beépített csomagot.
+        </p>
+        
+        <p>
+            Ha a letöltött disztribúció mégsem tartalmazná a numpy,
+            scipy, matplotlib csomagokat telepítsük ezeket.
+            
+            <ul>
+                <li>
+                    A <a href="https://numpy.org/"><strong>numpy</strong></a> 
+                    csomag n-dimenzionális tenzorok kezelését (vektor, 
+                    mátrix) és az ezekhez tartozó aritmetikai és 
+                    lineáris algebrai műveleteket teszi elérhetővé (pl. 
+                    vektorok skalárszorzata, mátrixszorzat, 
+                    egyenletrendszer megoldása, mátrix invertálása, FFT 
+                    - gyors Fourier-transzformáció).
+                </li>
+                <li>
+                    A <a href="https://www.scipy.org/"><strong>scipy</strong></a> 
+                    csomag a <strong>numpy</strong> funkcionalitását 
+                    bővíti ki további függvényekkel: jelfeldolgozási 
+                    függvények, interpoláció, statisztikák, ritka
+                    mátrixok, Matlab adatfájlok (<code>*.mat</code>)
+                    írása és olvasása, speciális függvények.
+                </li>
+                
+                <li>
+                    A <a href="https://matplotlib.org/"> 
+                    <strong>matplotlib</strong></a> csomag Matlab 
+                    parancsokhoz hasonló ábrakészítő függvényeket 
+                    tartalmaz.
+                </li>
+            </ul>
+        </p>
+        
+        <p>
+            A fentebb felsorolt csomagok maguk is rengeteg függvényt
+            tartalmaznak, melyeket nem fogunk tudni mind érinteni a
+            kurzus során, de dokumentációjuk elérhető az interneten.
+        </p>
+        
+        <p>
+            A csomagok használatával a különböző <em>notebook</em>-okban
+            fogunk megismerkedni.
+        </p>
+        
+        <figure>
+            <img src="images/anaconda/packages_numpy.png" alt="Anaconda numpy csomag"/>
+            <figcaption>
+                Anaconda numpy csomag
+            </figcaption>
+        </figure>
+
+        <figure>
+        <img src="images/anaconda/packages_scipy.png" alt="Anaconda scipy"/>
+            <figcaption>
+                Anaconda scipy csomag
+            </figcaption>
+        </figure>
+
+        <figure>
+        <img src="images/anaconda/packages_matplotlib.png" alt="Anaconda matplotlib csomag"/>
+            <figcaption>
+                Anaconda matplotlib csomag
+            </figcaption>
+        </figure>
+        
+        <h2>A Jupyter Notebook</h2>
+        
+        <p>
+            A kurzus során a <em>notebook</em> formátumot fogjuk 
+            használni a legtöbbet. A notebook fájl 
+            (<code>*.ipynb</code>), egy json formátú szövegfájl, melyet
+            a <strong>Jupyter Notebook</strong> alkalmazással tudunk
+            megnyitni. Magáról a notebook-ról és funkcionalitásáról
+            a következő jegyzetben lesz szó.
+        </p>
+        
+        <p>
+            Az <strong>Anaconda Navigator</strong>-ból elindítva
+            a <strong>Jupyter Notebook</strong>-ot, az alkalmazás az
+            alapértelmezett böngésző pogramban egy új lapot megnyitva
+            jelenik meg.
+        </p>
+        
+        <p>
+            Az alkalmazást a böngészőből tudjuk kezelni. Tekintsük át
+            a legfontosabb funkciókat:
+            
+            <ul>
+                <li>
+                    A mappanevekre kattintva beléphetünk az adott
+                    mappába, hasonlóan egy fáljkezelő programhoz.
+                </li>
+                <li>
+                    Egy adott fájlra kattintva a program megnyitja azt.
+                    Egyszerű szövegfájl esetén, egy szövegszerkesztő
+                    programot indít el. Képfájlokat új böngésző lapon
+                    nyit meg. Notebook fájlra kattintva megnyitja
+                    azt egy új böngésző lapon.
+                </li>
+                <li>
+                    A <strong>New</strong> menüpont alatt
+                    létrehozhatunk új mappát,szöveges fájlt és
+                    <em>notebook</em>-ot.
+                </li>
+                <li>
+                    A <strong>Quit</strong> gomb, értelemszerűen
+                    leállítja az alkalmazást.
+                </li>
+            </ul>
+        </p>
+        
+        <figure>
+            <img src="images/anaconda/jupyter_notebook.png" alt="Jupyter Notebook"/>
+            <figcaption>
+                A <strong>Jupyter Notebook</strong> kezdőképernyője.
+            </figcaption>
+        </figure>
+    </body>
+</html>

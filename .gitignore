@@ -1,3 +1,6 @@
+# dirs
+/releases/
+
 # datafiles
 *.csv
 *.npy
