@@ -10,11 +10,11 @@ exporter = HTMLExporter()
 
 Root = utils.Path(__file__).abspath().dirname()
 html = Root.join("html")
-outdir = html.join("notebooks")
+outdir = html.join("notebooks").mkdir()
 
 def main():
-    if 0:
-        for notebook in Root.join("notebooks_hu", "*.ipynb").iglob():
+    if 1:
+        for notebook in Root.join("notebooks", "hu", "*.ipynb").iglob():
             contents = notebook.read_all()
             contents = nbformat.reads(contents, as_version=4)
     

@@ -13077,35 +13077,20 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>open</code> parameters:</p>
-
-<pre><code>- "r" read
-- "w" write
-- "r+", "w+" read and write
-- "rb", "wb" binary read/write</code></pre>
+<h1 id="F&#225;jlok-olvas&#225;sa,-bevitel,-kivitel">F&#225;jlok olvas&#225;sa, bevitel, kivitel<a class="anchor-link" href="#F&#225;jlok-olvas&#225;sa,-bevitel,-kivitel">&#182;</a></h1><p>Az egyik alapvető műveletek közé tartozik a programozásban a bemenet és kimenet kezelése. Adatot elsősorban az ún. standard bemenetről (standard input - stdin) és standard kimenetre (standard output - stdout) írhatunk. Természetesen az írás és olvasás műveletek elérhetőek fájlok esetén is.</p>
+<p>A tudományos programozás során elsősorban fájlokból olvasunk és fájlokba írunk.</p>
+<p>Ebben a <em>notebook</em>-ban a fájlok olvasásával és írásával ismerkedünk meg, illetve néhány alapvető karakterlánc (továbbiakban <code>string</code>) manipulációs művelettel.</p>
+<h2 id="F&#225;jlok-olvas&#225;sa">F&#225;jlok olvas&#225;sa<a class="anchor-link" href="#F&#225;jlok-olvas&#225;sa">&#182;</a></h2><p>Felkiáltójellel (!) kezdve egy sort a cellában tudunk <code>shell</code> parancsokat kiadni. Linux alapú rendszerben a <code>cat</code> parancs egy fájl tartalmát nyomtatja ki, jelen esetben az <code>assets</code> mappában található <code>adat.txt</code> fájl tartalmát láthatjuk.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat assets/adat.txt
 </pre></div>
 
     </div>
@@ -13118,24 +13103,62 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;_io.TextIOWrapper name=&#39;adat.txt&#39; mode=&#39;r&#39; encoding=&#39;UTF-8&#39;&gt;</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 2
+3 4</pre>
 </div>
-
 </div>
 
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Fájlokat az <code>open</code> függvény segítségével nyithatunk meg. Ez a függvény a nagyjából a C vagy Matlab <code>fopen</code> függvényével ekvivalens. Az első argumentuma a fájl elérési útvonala, a második argumentuma a fájl megnyitásának módja:</p>
+<ul>
+<li><code>"r"</code> = read; fájl megnyitása olvasásra</li>
+<li><code>"w"</code> = write; fájl megnyitása írásra, a fájl előző tartalma törlődik</li>
+<li><code>"a"</code> = append; fájl megnyitása írásra, a fájl előző tartalma nem törlődik, a fájl végére tudunk írni</li>
+<li><code>"r+"</code>, <code>"w+"</code>; fájl megnyitásra írásra <strong>ÉS</strong> olvasásra</li>
+<li><code>"rb"</code>, <code>"wb"</code> binary read/write; fájl bináris módban történő olvasása és írása</li>
+</ul>
+<p>Erősen ajánlott csak egyfajta módot alkalmazni, fájlt <strong>csak</strong> írásra <strong>vagy csak</strong> olvasásra megnyitni. Fájlt egyszerre írni és olvasni problémás lehet. Pl. mi a helyzet akkor ha nem csak mi írunk a fájlba, hanem egy másik program is.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># fájl megnyitása olvasásra</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="c1"># windows esetén</span>
+<span class="c1"># file = open(&quot;assets\adat.txt&quot;, &quot;r&quot;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Egy megnyitott fájlon ugyanúgy lehet végigjárni (végigiterálni) mint egy Python tárolón (pl. list-en). Ekkor a <code>line</code> változó a fájl egy sorát tartalmazó string lesz.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
@@ -13167,9 +13190,18 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ha egyszer végigjártuk a fájlt, azt nem tudjuk újra végigjárni, előtte vissza kell térni a fájl elejére. Ezt a <code>seek</code> metódussal tehetjük meg.</p>
+<h2 id="R&#246;vid-kit&#233;r&#337;:-met&#243;dusok">R&#246;vid kit&#233;r&#337;: met&#243;dusok<a class="anchor-link" href="#R&#246;vid-kit&#233;r&#337;:-met&#243;dusok">&#182;</a></h2><p>Bővebben az objektum orientált programozás során fogunk velük foglalkozni. Egyenlőre annyit jegyezzünk meg, hogy a metódusok olyan speciális függvények, melye egy adott Python objektumhoz tartoznak és képesek az objektumot, annak állapotát, megváltoztatni. Pl. a seek metódussal visszatérhetünk a fájl elejére.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
@@ -13183,10 +13215,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># seet(0, 0) = nulla bájtot szeretnénk lépni, a fájl elejétől</span>
+<span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13199,7 +13232,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[8]:</div>
 
 
 
@@ -13214,9 +13247,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A <code>readline</code> metódus segítségével szintén soronként tudjuk olvasni a fájl tartalmát.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
@@ -13232,7 +13273,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -13249,7 +13290,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
@@ -13265,7 +13306,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -13313,9 +13354,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A <code>readlines</code> metódus pedig egy list-be gyűjti a fájl sorainak tartalmát.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
@@ -13329,7 +13378,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
@@ -13358,175 +13407,23 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[&#39;1&#39;, &#39;2&#39;]
-</pre>
-</div>
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Alapvet&#337;-string-m&#369;veletek">Alapvet&#337; string m&#369;veletek<a class="anchor-link" href="#Alapvet&#337;-string-m&#369;veletek">&#182;</a></h2><p>A <code>lines</code> változó egy, olyan list, melynek elemei a fájl egyes sorainak felelnek meg. Egy sor string-ként van eltárolva. A string (magyarul karakterlánc; ritkán használt), ahogy a neve is sejteti, karakterek sorozatát vagy láncolatát tartalmazza.</p>
+<p>Tekintsünk át néhány hasznos string metódust.</p>
+<p>A <code>split</code> metódus egy új list-et hoz létre a string-ből. A létrehozott list elemei maguk is string-ek. A kiinduló string elemeinek szétválasztása új string elemekké az ún. whitespace (tabulátor, space, soremelés = <code>\n</code>) karaktereknél történik.</p>
 
 </div>
 </div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;1,2,3,4&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[12]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;min: 4.5&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[14]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;   min: 4.5&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[15]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;min: 4.5   &#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># az első sor</span>
+<span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -13545,7 +13442,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;min: 4.5&#39;</pre>
+<pre>&#39;1 2\n&#39;</pre>
 </div>
 
 </div>
@@ -13559,20 +13456,48 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;   min: 4.5   &quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;1&#39;, &#39;2&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Az elválasztó karakter nem csak whitespace lehet.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;1,2,3,4&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13591,7 +13516,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;min&#39;, &#39; 4.5&#39;]</pre>
+<pre>[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]</pre>
 </div>
 
 </div>
@@ -13599,14 +13524,103 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A <code>strip</code> metódus a string elejéről és végéről távolítja el a whitespace karaktereket.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;min: 4.5&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Az <code>rstrip</code> (rightstrip) csak a string végéről (jobb oldaláról) távolít el whitespace karaktereket.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;   min: 4.5&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Az <code>lstrip</code> (leftstrip) csak a string elejéről (bal oldaláról) távolít el whitespace karaktereket.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;asd asds </span><span class="se">\</span>
-<span class="s2">asdsad&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13625,6 +13639,145 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
+<pre>&#39;min: 4.5   &#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A strip függvények egy új string-el térnek vissza, melyre úgyanúgy alkalmazhatunk string metódusokat, így metódusok sorát tudjuk láncban alkalmazni (method chaining).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ugyanaz mintha a strip metódust hívtuk volna meg.</span>
+<span class="s2">&quot;   min: 4.5   &quot;</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;min: 4.5&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ha pl. egy konfigurációs fájlt olvasunk, ahol a kulcs érték párok <code>:</code>-al vannak elválasztva egy adott sort a következőképpen dolgozhatunk fel.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;   min: 4.5   &quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># &quot;üres&quot; karakterek eltávolítása és a sor kettéválsztása &#39;:&#39; metntén</span>
+<span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;min&#39;, &#39; 4.5&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>String-et többféleképpen definiálhatunk. Ha egy string túl hosszú, a <code>\</code> karakterrel több sorba tördelhetjük. <strong>Figyelem:</strong> A string nem fog új sor karaktert tartlmazni, lásd a kinyomtatott sor a cella alatt.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;asd asds </span><span class="se">\</span>
+<span class="s2">asdsad&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
 <pre>&#39;asd asds asdsad&#39;</pre>
 </div>
 
@@ -13634,9 +13787,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>String formázása az újsor karterek megtartásával.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -13656,7 +13817,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[23]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -13671,12 +13832,21 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tegyük fel, hogy be szeretnénk olvasni egy konfigurációs fájlt. A konfigurációs fájlban a kulcs-érték párok <code>:</code>-al vannak elválasztva, a <code>#</code>-al kezdődő sorok kommentnek számítanak.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># fájl tartalmának definiálása</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2"># comment</span>
 <span class="s2">max: 3.4</span>
 <span class="s2">min: -1.2</span><span class="se">\</span>
@@ -13694,7 +13864,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[25]:</div>
+    <div class="prompt output_prompt">Out[29]:</div>
 
 
 
@@ -13709,15 +13879,26 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A kommentek kiszűrésére segítségünkre lehet a <code>startswith</code> metódus.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># járjuk végig soronként a &quot;fájl&quot; tartalmát</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+    <span class="c1"># ha a sor #-al kezdődik írjuk ki komment előtaggal</span>
     <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
         <span class="c1"># continue</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Comment:&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+    <span class="c1"># egyébként válasszuk ketté kulcs-érték párra a sort</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">))</span>
 </pre></div>
@@ -13747,9 +13928,79 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Készítsunk egy dictionary-t, ami tartalmazza a a kulcs-érték párokat.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># üres dictionary készítése</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># járjuk végig soronként a &quot;fájl&quot; tartalmát</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+    <span class="c1"># ha a sor nem #-al kezdődik adjuk hozzá a dictionary-hez</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+        <span class="n">params</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;max&#39;: &#39;3.4&#39;, &#39;min&#39;: &#39;-1.2&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A list létrehozásához hasonlóan itt is használhatunk ún. comprehension-t.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
@@ -13764,12 +14015,20 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Elemek lekérése.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -13782,13 +14041,15 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+    <div class="prompt output_prompt">Out[39]:</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;max&#39;: &#39;3.4&#39;, &#39;min&#39;: &#39;-1.2&#39;} 3.4 -1.2
-</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;3.4&#39;</pre>
 </div>
+
 </div>
 
 </div>
@@ -13797,7 +14058,48 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[40]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;-1.2&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A dictionary értékei továbbra is string-ek. Ahhoz, hogy számként tudjuk őket kezelni, át kell őket alakítani string-ből számmá, egyébként nem tudunk aritmetikai műveleteket végrehajtani rajtuk.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">])</span>
@@ -13815,7 +14117,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[32]:</div>
+    <div class="prompt output_prompt">Out[41]:</div>
 
 
 
@@ -13830,12 +14132,64 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Python-hibakezel&#233;s">Python hibakezel&#233;s<a class="anchor-link" href="#Python-hibakezel&#233;s">&#182;</a></h1><p>A Python hibakezelése az ún. Exception (Kivétel) értékeken alapszik. Tegyük fel, hogy meg akarunk nyitni egy fájlt, ami nem létezik:</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;a.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-43-29a71b945a84&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>open<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;a.txt&#34;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;a.txt&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A Python ekkor "dob" vagy "emel" egy kivételt (raise an exception). Miért is fontos ez számunkra? Tegyuk fel, hogy olvasni szeretnénk egy fájlt.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
 <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
 <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
@@ -13848,9 +14202,17 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A fájl olvasása rendben megtörtént és a <code>close</code> metódussal le is zártuk a fájlt. Ezt ellenőrizhetjük a file változó <code>closed</code> elemével.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">closed</span>
@@ -13866,7 +14228,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[34]:</div>
+    <div class="prompt output_prompt">Out[46]:</div>
 
 
 
@@ -13881,12 +14243,20 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Mi a helyzet akkor, ha valami hiba történik az olvasás közben.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
 <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
 <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
@@ -13913,7 +14283,7 @@ div#notebook {
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ZeroDivisionError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-35-8f6933efd663&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">&lt;ipython-input-51-abc7bc86b69c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> file<span class="ansi-blue-fg">.</span>readline<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span> 
 <span class="ansi-green-fg">----&gt; 6</span><span class="ansi-red-fg"> </span><span class="ansi-cyan-fg">7</span> <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">0</span>
@@ -13928,9 +14298,18 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A Python dobott egy kivételt. (Vegyük észre, hogy jelen esetben a kivétel típusa <code>ZeroDivisionError</code>, nem <code>FileNotFoundError</code>. A kivétel típusa információval szolgál a bekövetkezett hiba természetéről. A kivételeknek van egy adott hierarchiája, erről <a href="https://airbrake.io/blog/python-exception-handling/class-hierarchy">itt</a> lehet többet olvasni.)</p>
+<p>Ez rendben is van, hiszen illegális műveletet próbáltunk végrehajtani (nullával osztás). Abban az esetben, amikor egy kivételt dob a Python értelmező, a program futása megáll, esetünkben nem érkeztünk el a fájlt lezáró műveletig, tehát nem zártuk le a fájlt.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">closed</span>
@@ -13946,7 +14325,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[36]:</div>
+    <div class="prompt output_prompt">Out[50]:</div>
 
 
 
@@ -13961,9 +14340,188 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A fájl lezárásának elhalasztása több problémához is vezethet (technikai részletek <a href="https://www.quora.com/Why-do-we-need-to-flush-the-buffer-when-doing-I-O-operations?share=1">itt</a>).</p>
+<p>A Pythonban a kivételek kezelése a <code>try</code> és <code>except</code> blokkok segítségével történik. Jelen példán keresztül bemutatva.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+    <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+    <span class="mi">7</span> <span class="o">/</span> <span class="mi">0</span>
+    <span class="c1"># exception elmentése az e változóba</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception raised: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1"># további hibakezelés</span>
+    
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Exception raised:  division by zero
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">closed</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[53]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A probléma a fenti kóddal, hogy kétszer kell meghívnunk a close metódust. Egyik esetben, amikor hibával fut le a kódunk, másik esetben, amikor hiba nélkül. (Jelen esetben mindig hibával fog lefutni a kód, de a valóságban, természetesen nem jellemzőek az ilyen szituácók.)</p>
+<p>A probléma megoldásása a <code>finally</code> blokk használható.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+    <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+    <span class="mi">7</span> <span class="o">/</span> <span class="mi">0</span>
+    <span class="c1"># exception elmentése az e változóba</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception raised: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="c1"># további hibakezelés</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Exception raised:  division by zero
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">closed</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[58]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A finally blokkban definált utasítások mindig lefutnak, akár bekövetkezett hiba, akár nem. Ez a hibakezelési szituáció, olyan sokszor előfordul, hogy a kód egyszerűbbé tételére egy speciális szintaxist építettek a nyelvbe:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
@@ -13988,24 +14546,32 @@ div#notebook {
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ZeroDivisionError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-40-94d17e42b83e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">with</span> open<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;adat.txt&#34;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> file<span class="ansi-blue-fg">:</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-59-94d17e42b83e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">with</span> open<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;adat.txt&#34;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> file<span class="ansi-blue-fg">:</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span>     file<span class="ansi-blue-fg">.</span>readline<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg">     </span><span class="ansi-cyan-fg">7</span> <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">0</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>     <span class="ansi-cyan-fg">7</span> <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">0</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span>     file<span class="ansi-blue-fg">.</span>readline<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-red-fg">ZeroDivisionError</span>: division by zero</pre>
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;adat.txt&#39;</pre>
 </div>
 </div>
 
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A fenti kóddal tömörebben tudjuk elérni azt, amit előbb a try-catch-finally blokkal tudtunk megvalósítani.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span><span class="o">.</span><span class="n">closed</span>
@@ -14021,7 +14587,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[38]:</div>
+    <div class="prompt output_prompt">Out[62]:</div>
 
 
 
@@ -14036,12 +14602,29 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Valóban a hiba ellenére a fájl lezárt állapotba került.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="F&#225;ljok-&#237;r&#225;sa,-string-form&#225;z&#225;s">F&#225;ljok &#237;r&#225;sa, string form&#225;z&#225;s<a class="anchor-link" href="#F&#225;ljok-&#237;r&#225;sa,-string-form&#225;z&#225;s">&#182;</a></h2><p>Most nézzünk egy rövid példát a fájlok írására. Írjuk ki a Python értelmező verzióját egy fájlba.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sys package importálása</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 </pre></div>
 
     </div>
@@ -14051,11 +14634,13 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Python version: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># használjuk a with blokkot</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/version.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># a write metódussal tudunk &quot;f&quot; fájlba írni</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Python version: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14065,61 +14650,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;adat.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">mtx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-
-<span class="n">mtx</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[45]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[1., 2.],
-       [3., 4.]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mtx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="s2">&quot;adat.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">mtx</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat assets/version.txt
 </pre></div>
 
     </div>
@@ -14132,42 +14666,34 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[47]:</div>
+    <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[1., 2.],
-       [3., 4.]])</pre>
-</div>
-
-</div>
-
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Python version: 3.7.4 (default, Aug 13 2019, 20:35:49) 
+[GCC 7.3.0]
+</pre>
 </div>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">mtx</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Az írás során egy eddig ismeretlen szintaxist használtunk. A Python-ban a <code>%</code> "operátor" és formázási string segítségével tudunk egy adott változót string-be formázni.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mtx1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data.npy&quot;</span><span class="p">)</span>
-<span class="n">mtx1</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">&quot;Python version: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span>
 </pre></div>
 
     </div>
@@ -14180,14 +14706,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[80]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[1., 2.],
-       [3., 4.]])</pre>
+<pre>&#39;Python version: 3.7.4 (default, Aug 13 2019, 20:35:49) \n[GCC 7.3.0]\n&#39;</pre>
 </div>
 
 </div>
@@ -14199,57 +14724,18 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>street,city,zip,state,beds,baths,sq__ft,type,sale_date,price,latitude,longitude</p>
+<p>A <code>%s</code> karakter helyére, string formátumban a Python beillesztette a <code>sys.version</code> változó értékét. Ez a szintaxis ismerős lehet C progrmozóknak, gyakorlatilag megegyezik a C-ben definiált formázási szabályokkal. Nézzünk néhány további páldát.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_type</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([</span>
-    <span class="p">(</span><span class="s2">&quot;street&quot;</span><span class="p">,</span> <span class="s2">&quot;S20&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">,</span> <span class="s2">&quot;S20&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;zip&quot;</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="s2">&quot;S20&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;beds&quot;</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;baths&quot;</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;sqft&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;S20&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;sale_date&quot;</span><span class="p">,</span> <span class="s2">&quot;S20&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">)</span>
-<span class="p">])</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;example.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-                  <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">data_type</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># egész szám = integer formázása</span>
+<span class="s2">&quot;int: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mi">1</span>
 </pre></div>
 
     </div>
@@ -14262,73 +14748,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[(b&#39;3526 HIGH ST&#39;, b&#39;SACRAMENTO&#39;, 95838, b&#39;CA&#39;, 2, 1,  836., b&#39;Residential&#39;, b&#39;Wed May 21 00:00:00 &#39;, 59222., 38.631913, -121.434879)
- (b&#39;51 OMAHA CT&#39;, b&#39;SACRAMENTO&#39;, 95823, b&#39;CA&#39;, 3, 1, 1167., b&#39;Residential&#39;, b&#39;Wed May 21 00:00:00 &#39;, 68212., 38.478902, -121.431028)]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">],</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[81]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7fefa1154e10&gt;]</pre>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
+<pre>&#39;int: 1&#39;</pre>
 </div>
 
 </div>
@@ -14339,10 +14765,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;lon&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># lebegőpontpos szám = float formázása</span>
+<span class="s2">&quot;float: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">2.75</span>
 </pre></div>
 
     </div>
@@ -14355,13 +14782,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[58]:</div>
+    <div class="prompt output_prompt">Out[84]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>-121.551704</pre>
+<pre>&#39;float: 2.750000&#39;</pre>
 </div>
 
 </div>
@@ -14372,10 +14799,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 10 - összes karakter száma, 3 - tizedes jegy utáni számjegyek száma</span>
+<span class="s2">&quot;float: </span><span class="si">%10.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">2.75</span>
 </pre></div>
 
     </div>
@@ -14388,13 +14816,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[59]:</div>
+    <div class="prompt output_prompt">Out[92]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>234144.26395939087</pre>
+<pre>&#39;float:      2.750&#39;</pre>
 </div>
 
 </div>
@@ -14405,27 +14833,11 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Adds two numbers together.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># exponenciális jelölés</span>
+<span class="s2">&quot;float: </span><span class="si">%1.3e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="mf">2.75</span>
 </pre></div>
 
     </div>
@@ -14438,279 +14850,55 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Help on function add in module __main__:
-
-add(a, b)
-    Adds two numbers together.
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">7</span> <span class="o">/</span> <span class="mi">0</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ZeroDivisionError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-62-c0c9dc45e2b4&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-cyan-fg">7</span> <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">0</span>
-
-<span class="ansi-red-fg">ZeroDivisionError</span>: division by zero</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;function a&quot;</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
-        <span class="mi">7</span> <span class="o">/</span> <span class="mi">0</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;end function a&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">b</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="n">a</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>function a
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ZeroDivisionError</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-72-3bf86fc5afda&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>b<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">&lt;ipython-input-64-4e012af66d5a&gt;</span> in <span class="ansi-cyan-fg">b</span><span class="ansi-blue-fg">(error)</span>
-<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">def</span> b<span class="ansi-blue-fg">(</span>error<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg">     </span>a<span class="ansi-blue-fg">(</span>error<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">&lt;ipython-input-63-92aa2044326f&gt;</span> in <span class="ansi-cyan-fg">a</span><span class="ansi-blue-fg">(error)</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> 
-<span class="ansi-green-intense-fg ansi-bold">      4</span>     <span class="ansi-green-fg">if</span> error<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg">         </span><span class="ansi-cyan-fg">7</span> <span class="ansi-blue-fg">/</span> <span class="ansi-cyan-fg">0</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> 
-<span class="ansi-green-intense-fg ansi-bold">      7</span>     print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;end function a&#34;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">ZeroDivisionError</span>: division by zero</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">b</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">a</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ArithmeticError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ArithmeticError&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">FloatingPointError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FloatingPointError&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>function a
-ArithmeticError
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">b</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">a</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>function a
-Exception
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">param</span> <span class="o">=</span> <span class="s2">&quot;zz&quot;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">convert</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[79]:</div>
+    <div class="prompt output_prompt">Out[97]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;zz&#39;</pre>
+<pre>&#39;float: 2.750e+00&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Manapság inkább egy alternatív módszer használatos a string-ek formázására, amit a string <code>format</code> metódusával tudunk használni:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># {} jelöli a változó helyét</span>
+<span class="s2">&quot;float: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">2.75</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[103]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;float: 2.75&#39;</pre>
 </div>
 
 </div>
@@ -14721,10 +14909,95 @@ Exception
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># pontosság beállítása</span>
+<span class="s2">&quot;float: </span><span class="si">{:5.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">2.75</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[102]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;float:  2.75&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># több változó esete</span>
+<span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{:5.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="mf">2.75</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[104]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;value:  2.75&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A format metódus és a <code>%</code> operátor szintaxisáról bővebben <a href="https://pyformat.info/">itt</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Az előző fájlhoz hozzáfűzünk.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;assets/version.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Python version: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14734,13 +15007,10 @@ Exception
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="n">lin</span><span class="o">.</span><span class="n">lstsq</span><span class="p">()</span>
-<span class="k">except</span> <span class="n">lin</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-    <span class="c1"># handling error</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>cat assets/version.txt
 </pre></div>
 
     </div>
@@ -14756,12 +15026,11 @@ Exception
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-cyan-intense-fg ansi-bold">  File </span><span class="ansi-green-intense-fg ansi-bold">&#34;&lt;ipython-input-134-78f26fcc3808&gt;&#34;</span><span class="ansi-cyan-intense-fg ansi-bold">, line </span><span class="ansi-green-intense-fg ansi-bold">4</span>
-<span class="ansi-yellow-intense-fg ansi-bold">    # handling error</span>
-<span class="ansi-white-intense-fg ansi-bold">                    ^</span>
-<span class="ansi-red-intense-fg ansi-bold">SyntaxError</span><span class="ansi-red-intense-fg ansi-bold">:</span> unexpected EOF while parsing
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Python version: 3.7.4 (default, Aug 13 2019, 20:35:49) 
+[GCC 7.3.0]
+Python version: 3.7.4 (default, Aug 13 2019, 20:35:49) 
+[GCC 7.3.0]
 </pre>
 </div>
 </div>
@@ -14769,6 +15038,14 @@ Exception
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A következő fejezetben a numpy csomaggal ismerkedünk meg.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>
