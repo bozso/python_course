@@ -1,0 +1,212 @@
+<DOCTYPE! html>
+
+<html>
+    <head>
+        <title>Beveztés a python programozási nyelvhez</title>
+        <meta charset="utf-8">
+        <meta author="Bozsó István">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        
+        <style>
+            img {
+                width: 100%;
+                border: 1.75px solid black;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="/home/istvan/packages/src/github.com/bozso/utils/css/notes.css" />
+    </head>
+    
+    <body>
+        <h1>Beveztés a python programozási nyelvhez</h1>
+        
+        <p>A Python egy</p>
+        
+        <ul>
+            <li>
+                általános célú (nem csak tudományos programozásra 
+                alkalmas nyelv, lehet vele szervert, fájlkezelőt, 
+                készíteni)
+            </li>
+            <li>
+                magas szintű (általános, absztrakt, algoritmusok írása 
+                könnyebb gyorsabb),
+            </li>
+            <li>
+                értelmezett (nem fordított, mint C, C++ vagy 
+                Fortran),
+            </li>
+            <li>
+                dinamikus típusos (dynamically typed; a változóknak
+                nincs típusa, mind Python objektumok),
+            </li>
+            <li>
+                garbage collected (szemtgyűjtéses?, automatikus 
+                memóriakezelés, haladó programozóknak egy <a 
+                href="https://stackify.com/python-garbage-collection/">cikk</a> 
+                a technikai részletekről)
+            </li>
+            <li>
+                objektum orientált (lásd objektum orientált programozás 
+                notebook).
+            </li>
+        </ul>
+
+        <p>
+            programozási nyelv. Ezeket a tulajdonságokat nem kell 
+            feltétlenül megjegyezni, de érdemes észben tartani. Amint 
+            látni fogjuk a Python-al viszonylag könnyű programokat 
+            írni, a nyelv szintaxisa rendkívül kifelyező. Mivel a 
+            változóknak nincs definiált típusa, a különböző függvények, 
+            algoritmusok implementálása rugalmasan elvégezhető.
+        </p>
+        
+        <p>
+            Ebben a dokumentumbanban először röviden megvizsgáljuk azokkat 
+            a tényezőkket, amiknek köszönhetően manapság a Python 
+            nyelvet használják dominánsan tudományos programozási 
+            feladatok megoldására.
+        </p>
+
+        <h2>
+            Miért alkalmas a python nyelv tudományos programozási 
+            porblémák megoldására?
+        </h2>
+        
+        <h3>Értelmezett és fordított programozási nyelvek</h3>
+        
+        <p>
+            Egy rövid kitérő az értelmezőkről (intepreters) és 
+            fordítókról (compilers). A különböző programozási nyelveket 
+            többféleképpen kategorizálhatjuk. Az egyik kategorizálás 
+            szerint, az egyszerűség kedvéért nem részletezve a 
+            technikai megfontolásokat, azt mondhatjuk, hogy vannak 
+            értelmezett (interpreted) és fordított (compiled) 
+            programozási nyelvek. (A teljesség kedvéért meg kell 
+            említsem a C# és Java progrmozási nyelveket; ezek kb. a 
+            fordított és az értelmezett nyelvek közé szokták 
+            sorolni.)
+        </p>
+        
+        <p>
+            Az értelmezett nyelvek esetén egy program, az értelmező 
+            (intepreter), a forráskódot soronként beolvassa, értelmezi 
+            és végrehajtja. Ilyen programnyelv pl. a Matlab vagy a 
+            Python.
+        </p>
+        
+        <p>
+            A fordított programnyelveket forráskódját egy másikfajta 
+            program, a fordító (compiler), gépi kódra fordítja és 
+            futtatható programot vagy más programokban felhasználható 
+            könyvtárat készít belőle. Pl. C, C++, Fortran.
+        </p>
+        
+        <p>
+            A fordítást mindig csak akkol kell újra elvégezni, ha a
+            program forráskódja megváltozott. Az értelmezett
+            programnyelvek esetén az értelmezést minden egyes alkalommal
+            el kell végeznie az értelmezőnek, akkor is ha a forráskód
+            nem változott meg.
+        </p>
+        
+        <figure>
+            <img 
+            style="width: 500px;"
+            src="https://2.bp.blogspot.com/-duV6K80iefg/V8QrNJWoAdI/AAAAAAAAB18/5DHOXl1ajnsEVRBUmB5nSXfJbsw5ScX3wCLcB/s400/img.png" 
+            alt="interpreted_vs_compiled">
+            <figcaption>
+                A fordítás és értelmezés folyamatábrái.
+            </figcaption>
+        </figure>
+        
+        <p>
+            Elméleti szempontból nincsenek értelmezett és fordított 
+            programozási nyelvek, azaz bármely programozási nyelvhez 
+            készíthatő értelmező program (pl. <a 
+            href="https://gitlab.com/zsaleeba/picoc">egy C 
+            értelmező</a>) vagy fordító (pl. <a 
+            href="https://cython.org/">Cython fordító</a>, mely először 
+            C forráskódot generál python forrásfájlokból, melyet késöbb 
+            egy C fordítóval lefordít).
+        </p>
+        
+        <p>
+            Továbbá egy adott nyelvhez akár többfajta értelmező program 
+            is készíthető. Python esetén:
+        </p>
+        
+        <ul>
+            <li>
+                a C-ben megírt referencia értelmező, a <a 
+                href="https://github.com/python/cpython">CPython</a>; 
+                nem összekeverendő a Cython-nal.
+            </li>
+            
+            <li>
+                Java-ban (<a href="https://www.jython.org/">Jython</a>) 
+                és C#-ban (<a 
+                href="https://ironpython.net/">IronPython</a>) írt 
+                értelmező
+            </li>
+        </ul>
+        
+        <p>
+            A témáről bővebben <a 
+            href="https://www.thoughtco.com/about-compilers-and-interpreters-958276">ebben</a> 
+            a cikkben olvashattok.
+        </p>
+        
+        <p>Általánosan elmondható:</p>
+        
+        <ul>
+            <li>
+                az értelmezett nyelvek kevésbé hatákonyak (számítások 
+                több memóriát vesznek igénybe és tovább tartanak),
+            </li>
+            <li>
+                fordítókat nehezebb készíteni, mint értelmezőket (az 
+                értelmezők könnyebben specializálhatóak más 
+                architekúrákra pl. 32 és 64 bites processzorok, 
+                mikrokontrollerek),</li>
+            <li>
+                az értelmezett nyelvekkel gyorsabb a problémamegoldás 
+                (nem minden esetben, erről késöbb lesz szó),
+            </li>
+            <li>
+                az értelmezett nyelvek általában képesek fordított 
+                könyvtárakat (C, C++, Fortran neylven írt 
+                könyvtárak) meghívni egy FFI (Foreign Function 
+                Interface) segítségével.
+            </li>
+        </ul>
+        <p>
+            A Python értelmezők általában nem hatékonyak, maga a Python 
+            nyelv nem igazán alkalmas numerikus számítások elvégzésére. 
+            Akkor mégis miért terjedt el a python használata ezen a 
+            területen? Amint korábban említettem, az értelmezett 
+            nyelvek általában képesek fordított nyelven megírt 
+            könyvtárak függvényeit meghívni.
+        </p>
+        
+        <p>
+            Az legelterjedtebb Python-hoz készített numerikus 
+            könyvtárak (numpy, scipy) nagy részét nem python-ban írták. 
+            Ezen könyvtárakban a számításigényes feladatokhoz (pl. 
+            lineáris algebrai feladatok, differenciális egyenletek 
+            megoldása) írt függvények tipikusan C-ben, C++-ban vagy 
+            Fortran-ban vannak implementálva. Ezeket a függvényeket a 
+            python csak meghívja, maga a Python kód csak "ragasztóként" 
+            (glue-code) funkcionál, mely összefűzi és könnyen 
+            használhatóvá teszi az egyébként körülményesen használható 
+            függvényeket.
+        </p>
+        
+        <p>
+            A következő jegyzetben megismerkedünk a notebook formátummal
+            és a Python értelmezővel, a nyelv szintaxisával és
+            néhány beépített tárolóval.
+        </p>
+    </body>
+</html>
