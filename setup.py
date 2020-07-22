@@ -4,31 +4,36 @@ import os
 import zipfile as zf
 import nbformat
 
+from pathlib import Path
+
 import utils
 
-exporter = HTMLExporter()
+exporter, pth = HTMLExporter(), os.path
 
-Root = utils.Path(__file__).abspath().dirname()
-html = Root.join("html")
-outdir = html.join("notebooks").mkdir()
 
 def main():
+    Root = Path(pth.dirname(pth.abspath(__file__)))
+    html = Root / "html"
+    
+    outdir = html.joinpath("notebooks")
+    outdir.mkdir(exist_ok=True)
+
     if 1:
-        for notebook in Root.join("notebooks", "hu", "*.ipynb").iglob():
-            contents = notebook.read_all()
+        for notebook in Root.joinpath("notebooks", "hu").glob("*.ipynb"):
+            contents = notebook.read_bytes()
             contents = nbformat.reads(contents, as_version=4)
     
             body, _ = exporter.from_notebook_node(contents)
             
-            out = notebook.basename().replace_ext("html")
+            out = "%s.html" % notebook.name.split(".")[0]
             
-            with outdir.join(out).open("w") as f:
+            with outdir.joinpath(out).open("w") as f:
                 f.write("".join(body))
     
     if 1:
         with utils.cd(html):
             sh.make_archive(
-                Root.join("releases", "jegyzet").get_path(),
+                str(Root.joinpath("releases", "jegyzet")),
                 "zip",
             )    
     

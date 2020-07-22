@@ -13079,6 +13079,30 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Bevezet&#233;s-a-numpy-csomag-haszn&#225;lat&#225;ba">Bevezet&#233;s a <a href="https://numpy.org">numpy</a> csomag haszn&#225;lat&#225;ba<a class="anchor-link" href="#Bevezet&#233;s-a-numpy-csomag-haszn&#225;lat&#225;ba">&#182;</a></h1><p>A Python nyelv nem támogatja a vektorok, mátrixok, tenzorok kezelését. Ehhez szükségünk van egy könyvtárra, amit nem tartalmaz a Python standard könyvtára.</p>
 <p>A numpy (numerical python), könyvtár elérhetővé teszi az n-dimenziós tömbök vagy tenzorok (n-dimensional array) kezeléssét, az azokon végrehajtható aritmetikai műveleteket, függvények elemenkénti alkalmazását, lineáris algebrai műveleteket, továbbá függvények numerikus integrálását, interpolációt, polinom illesztést és sok egyéb függvényt.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Kit&#233;r&#337;:-Csomagok-haszn&#225;lata-&#233;s-probl&#233;m&#225;k-megold&#225;sa-Python-ban">Kit&#233;r&#337;: Csomagok haszn&#225;lata &#233;s probl&#233;m&#225;k megold&#225;sa Python-ban<a class="anchor-link" href="#Kit&#233;r&#337;:-Csomagok-haszn&#225;lata-&#233;s-probl&#233;m&#225;k-megold&#225;sa-Python-ban">&#182;</a></h2><p>Szinte minden Python csomag esetén erősen ajánlott a dokumentáció áttekintése. Egy csomagban rengeteg függvény és algoritmus található, ezeket lehetetlen lenne, akár felületesen is áttekinteni.</p>
+<p>Amikor Python-ban szeretnénk egy problémát megoldani először érdemes rákeresni, hogy a problémát meg próbálta-e már valaki oldani. Én még nem igazán találkoztam, olyan esettel, hogy ne létezett volna legalább egy könyvtárat vagy kódrészletet, ami alapján neki tudtam volna állni egy kód megírásának.</p>
+<p>Tudományos Python programozás esetén értékesebb a külünböző csomagok és függvényeinek ismerete mint magának a nyelvnek ismerete. (Természetesen a nyelvet is ismerni kell, hogy ne érjenek minket meglepetések.) Ezt csak tapasztalattal lehet elsajátítani.</p>
+<p>Tehát, amikor szeretnénk egy programot írni egy adott feladat megoldására, először gondolkozzunk el azon, hogy milyen csomagok és függvények állnak rendelkezésre, amik a feladat egyes részeit vagy egészét meg tudják oldani. Ha nem ismerünk ilyen csomagokat, akkor próbáljunk meg az interneten keresni és ha ott sem találunk segítséget, csak akkor álljunk neki mi magunk a megoldást implementálni.</p>
+<p>Tulajdonképpen a tudományos Python programozás művészete nagyrészt a különböző csomagok használatának művészete. Ez két fő részből áll:</p>
+<ol>
+<li>A csomagok által implementált algoritmusok, függvények használatának és limitációjának ismerete.</li>
+<li>A különböző csomagok különböző algoritmusainak összefűzése.</li>
+</ol>
+<p>A numpy egy "sarokpont" ebben a rendszerben, mivel a legtöbb tudományos csomag függvényei a numpy által implementált mátrixokon, tenzorokon, adattömbökön alapulnak és numpy adattömböket fogadnak el argumentumként vagy numpy adattömbbel térnek vissza.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="M&#225;trixok-t&#225;rol&#225;sa">M&#225;trixok t&#225;rol&#225;sa<a class="anchor-link" href="#M&#225;trixok-t&#225;rol&#225;sa">&#182;</a></h2><p>A gyakorlat előtt néhány technikai részlet, mely fontos lehet.</p>
 <p>Azonos típusú változókat általában egy kijelölt összefüggő memóriaszegmensben szokás tárolni. Mivel a vektor egy dimenziós, ezért nem kell különösebben gondolkdni a vektor elemeinek tárolási módján. Magasabb dimenziójú tenzorok esetén, már más a helyzet.</p>
 <p>A mátrix nem csak egyetlen egy sorból vagy oszlopból áll (mint a sor- vagy oszlopvektor), hanem sorok vagy oszlopok sorozatából. Ezeket a sorokat vagy oszlopokat nem érdemes különböző memóriaszegmensekben tárolni, ebben az esetben is összefüggő memóriaterületet szokás alkalmazni.</p>
