@@ -1,0 +1,15 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module add_one ! in 
+    interface  ! in :add_one
+        subroutine add_one(matrix,nrows,ncols) ! in :add_one:assets/add_one.f90
+            double precision dimension(nrows,ncols),intent(inout) :: matrix
+            integer, optional,intent(in),check(shape(matrix,0)==nrows),depend(matrix) :: nrows=shape(matrix,0)
+            integer, optional,intent(in),check(shape(matrix,1)==ncols),depend(matrix) :: ncols=shape(matrix,1)
+        end subroutine add_one
+    end interface 
+end python module add_one
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
