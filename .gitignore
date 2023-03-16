@@ -1,14 +1,19 @@
-# dirs
+# dirs, releases
 /releases/
+*.tar.gz
+*.gz
 
 # datafiles
 *.csv
 *.npy
 *.dat
 *.txt
+*.h5
 
 # images
 *.png
+*.pdf
+*.svg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
